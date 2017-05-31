@@ -73,7 +73,7 @@ const data = {
   password: 'fizz1eB0p',
 };
 
-Madefire.coupon.postRedemption('ccisd-2017', { data })
+Madefire.coupon.postRedemption('ccisd-2017', data)
   .then(function handleSuccess(user) {
     // {
     //     "compedApps": "",
