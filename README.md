@@ -36,7 +36,7 @@ import Madefire from 'madefire-web-sdk';
 
 `Madefire.coupon` contains methods for accessing Madefire's coupon code redemption APIs.
 
-#### getCampaign(campaignId)
+#### getCampaign(campaignSlug)
 
 Retrieves information about a specified campaign.
 
@@ -61,7 +61,7 @@ Madefire.coupon.getCampaign('ccisd-2017')
   });
 ```
 
-#### postRedemption(campaignId, options)
+#### postRedemption(campaignSlug, data)
 
 Redeems a coupon code for a specified campaign and registers the user (if not previously registered) and retrieves the new (or existing) user's data.
 
