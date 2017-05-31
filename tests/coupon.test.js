@@ -12,7 +12,7 @@ const unrejectedPromise = new Error('Promise was not rejected.');
 
 describe('Madefire', function() {
   describe('coupon', function() {
-    
+
     // Campaign IDs
     const NON_EXISTENT_CAMPAIGN = 'mf-does-not-exist';
     const PENDING_CAMPAIGN = 'mf-pending';
@@ -21,13 +21,13 @@ describe('Madefire', function() {
     const LIMITED_CAMPAIGN = 'mf-1x-current-active-generated';
     const INACTIVE_CAMPAIGN = 'mf-nx-current-inactive-generated';
     const EXPIRED_CAMPAIGN = 'mf-expired';
-    
+
     // Error codes.
     const BAD_REQUEST = '400';
     const NOT_FOUND = '404';
     const GONE = '410';
 
-    
+
     const MF_ENTITY_IDENTIFIER_REGEXP = /^[a-z]-[0-9a-f]{32}$/;
 
     describe('#getCampaign', function() {
@@ -92,7 +92,7 @@ describe('Madefire', function() {
               'redemptionsPerCoupon',
               'slug',
             ]);
-            
+
             // Validate data.
             const {
               activationDate,
@@ -105,7 +105,7 @@ describe('Madefire', function() {
               redemptionsPerCoupon,
               slug,
             } = data;
-            
+
             expect(activationDate).to.be.a('string');
             expect(activationDate).not.to.be.empty;
             expect(activationDate).to.satisfy(isValidDate);
@@ -161,18 +161,17 @@ describe('Madefire', function() {
     });
 
     describe('#postRedemption', function() {
-    
+
       const validRedemptionData = {
         code: '0',
         name: 'David Furfero',
         email: 'user@madefire.com',
         password: 'M4d3f1r3',
       };
-    
+
       it('should return a 404 error for a non-existent campaign', function(done) {
         const data = Object.assign({}, validRedemptionData);
-        const options = { data };
-        Madefire.coupon.postRedemption(NON_EXISTENT_CAMPAIGN, options)
+        Madefire.coupon.postRedemption(NON_EXISTENT_CAMPAIGN, data)
           .then(function() { done(unrejectedPromise); })
           .catch(function(error) {
             expect(error).to.be.instanceOf(Error);
@@ -180,11 +179,10 @@ describe('Madefire', function() {
             done();
           });
       });
-    
+
       it('should return a 404 error for a pending campaign', function(done) {
         const data = Object.assign({}, validRedemptionData);
-        const options = { data };
-        Madefire.coupon.postRedemption(PENDING_CAMPAIGN, options)
+        Madefire.coupon.postRedemption(PENDING_CAMPAIGN, data)
           .then(function() { done(unrejectedPromise); })
           .catch(function(error) {
             expect(error).to.be.instanceOf(Error);
@@ -192,11 +190,10 @@ describe('Madefire', function() {
             done();
           });
       });
-    
+
       it('should return a 404 error for a campaign without generated codes', function(done) {
         const data = Object.assign({}, validRedemptionData);
-        const options = { data };
-        Madefire.coupon.postRedemption(UNGENERATED_CAMPAIGN, options)
+        Madefire.coupon.postRedemption(UNGENERATED_CAMPAIGN, data)
           .then(function() { done(unrejectedPromise); })
           .catch(function(error) {
             expect(error).to.be.instanceOf(Error);
@@ -204,12 +201,11 @@ describe('Madefire', function() {
             done();
           });
       });
-    
+
       it('should return a 400 error for an invalid redemption: missing `code`', function(done) {
         const data = Object.assign({}, validRedemptionData);
         delete data.code;
-        const options = { data };
-        Madefire.coupon.postRedemption(UNLIMITED_CAMPAIGN, options)
+        Madefire.coupon.postRedemption(UNLIMITED_CAMPAIGN, data)
           .then(function() { done(unrejectedPromise); })
           .catch(function(error) {
             expect(error).to.be.instanceOf(Error);
@@ -217,12 +213,11 @@ describe('Madefire', function() {
             done();
           });
       });
-    
+
       it('should return a 400 error for an invalid redemption: empty `code`', function(done) {
         const data = Object.assign({}, validRedemptionData);
         data.code = '';
-        const options = { data };
-        Madefire.coupon.postRedemption(UNLIMITED_CAMPAIGN, options)
+        Madefire.coupon.postRedemption(UNLIMITED_CAMPAIGN, data)
           .then(function() { done(unrejectedPromise); })
           .catch(function(error) {
             expect(error).to.be.instanceOf(Error);
@@ -230,12 +225,11 @@ describe('Madefire', function() {
             done();
           });
       });
-    
+
       it('should return a 400 error for an invalid redemption: invalid `code`', function(done) {
         const data = Object.assign({}, validRedemptionData);
         data.code = 'not a valid code';
-        const options = { data };
-        Madefire.coupon.postRedemption(UNLIMITED_CAMPAIGN, options)
+        Madefire.coupon.postRedemption(UNLIMITED_CAMPAIGN, data)
           .then(function() { done(unrejectedPromise); })
           .catch(function(error) {
             expect(error).to.be.instanceOf(Error);
@@ -243,12 +237,11 @@ describe('Madefire', function() {
             done();
           });
       });
-    
+
       it('should return a 400 error for an invalid redemption: missing `name`', function(done) {
         const data = Object.assign({}, validRedemptionData);
         delete data.name;
-        const options = { data };
-        Madefire.coupon.postRedemption(UNLIMITED_CAMPAIGN, options)
+        Madefire.coupon.postRedemption(UNLIMITED_CAMPAIGN, data)
           .then(function() { done(unrejectedPromise); })
           .catch(function(error) {
             expect(error).to.be.instanceOf(Error);
@@ -256,12 +249,11 @@ describe('Madefire', function() {
             done();
           });
       });
-    
+
       it('should return a 400 error for an invalid redemption: empty `name`', function(done) {
         const data = Object.assign({}, validRedemptionData);
         data.name = '';
-        const options = { data };
-        Madefire.coupon.postRedemption(UNLIMITED_CAMPAIGN, options)
+        Madefire.coupon.postRedemption(UNLIMITED_CAMPAIGN, data)
           .then(function() { done(unrejectedPromise); })
           .catch(function(error) {
             expect(error).to.be.instanceOf(Error);
@@ -269,12 +261,11 @@ describe('Madefire', function() {
             done();
           });
       });
-    
+
       it('should return a 400 error for an invalid redemption: missing `email`', function(done) {
         const data = Object.assign({}, validRedemptionData);
         delete data.email;
-        const options = { data };
-        Madefire.coupon.postRedemption(UNLIMITED_CAMPAIGN, options)
+        Madefire.coupon.postRedemption(UNLIMITED_CAMPAIGN, data)
           .then(function() { done(unrejectedPromise); })
           .catch(function(error) {
             expect(error).to.be.instanceOf(Error);
@@ -282,12 +273,11 @@ describe('Madefire', function() {
             done();
           });
       });
-    
+
       it('should return a 400 error for an invalid redemption: empty `email`', function(done) {
         const data = Object.assign({}, validRedemptionData);
         data.email = '';
-        const options = { data };
-        Madefire.coupon.postRedemption(UNLIMITED_CAMPAIGN, options)
+        Madefire.coupon.postRedemption(UNLIMITED_CAMPAIGN, data)
           .then(function() { done(unrejectedPromise); })
           .catch(function(error) {
             expect(error).to.be.instanceOf(Error);
@@ -295,12 +285,11 @@ describe('Madefire', function() {
             done();
           });
       });
-    
+
       it('should return a 400 error for an invalid redemption: invalid `email`', function(done) {
         const data = Object.assign({}, validRedemptionData);
         data.email = 'not a valid email address';
-        const options = { data };
-        Madefire.coupon.postRedemption(UNLIMITED_CAMPAIGN, options)
+        Madefire.coupon.postRedemption(UNLIMITED_CAMPAIGN, data)
           .then(function() { done(unrejectedPromise); })
           .catch(function(error) {
             expect(error).to.be.instanceOf(Error);
@@ -308,12 +297,11 @@ describe('Madefire', function() {
             done();
           });
       });
-    
+
       it('should return a 400 error for an invalid redemption: missing `password`', function(done) {
         const data = Object.assign({}, validRedemptionData);
         delete data.password;
-        const options = { data };
-        Madefire.coupon.postRedemption(UNLIMITED_CAMPAIGN, options)
+        Madefire.coupon.postRedemption(UNLIMITED_CAMPAIGN, data)
           .then(function() { done(unrejectedPromise); })
           .catch(function(error) {
             expect(error).to.be.instanceOf(Error);
@@ -321,12 +309,11 @@ describe('Madefire', function() {
             done();
           });
       });
-    
+
       it('should return a 400 error for an invalid redemption: empty `password`', function(done) {
         const data = Object.assign({}, validRedemptionData);
         data.password = '';
-        const options = { data };
-        Madefire.coupon.postRedemption(UNLIMITED_CAMPAIGN, options)
+        Madefire.coupon.postRedemption(UNLIMITED_CAMPAIGN, data)
           .then(function() { done(unrejectedPromise); })
           .catch(function(error) {
             expect(error).to.be.instanceOf(Error);
@@ -334,32 +321,29 @@ describe('Madefire', function() {
             done();
           });
       });
-    
+
       it('should return data for a valid redemption (existing user)', function(done) {
         const data = Object.assign({}, validRedemptionData);
-        const options = { data };
-        Madefire.coupon.postRedemption(UNLIMITED_CAMPAIGN, options)
+        Madefire.coupon.postRedemption(UNLIMITED_CAMPAIGN, data)
           .then(function(data) {
             expect(data).to.exist;
             done();
           });
       });
-    
+
       it('should return data for a valid redemption (new user)', function(done) {
         const data = Object.assign({}, validRedemptionData);
         data.email = `user${Date.now()}@madefire.com`;
-        const options = { data };
-        Madefire.coupon.postRedemption(UNLIMITED_CAMPAIGN, options)
+        Madefire.coupon.postRedemption(UNLIMITED_CAMPAIGN, data)
           .then(function(data) {
             expect(data).to.exist;
             done();
           });
       });
-    
+
       it('should return a 400 error for an exhausted redemption code', function(done) {
         const data = Object.assign({}, validRedemptionData);
-        const options = { data };
-        Madefire.coupon.postRedemption(LIMITED_CAMPAIGN, options)
+        Madefire.coupon.postRedemption(LIMITED_CAMPAIGN, data)
           .then(function() { done(unrejectedPromise); })
           .catch(function(error) {
             expect(error).to.be.instanceOf(Error);
@@ -367,11 +351,10 @@ describe('Madefire', function() {
             done();
           });
       });
-    
+
       it('should return a 404 error for an inactive campaign', function(done) {
         const data = Object.assign({}, validRedemptionData);
-        const options = { data };
-        Madefire.coupon.postRedemption(INACTIVE_CAMPAIGN, options)
+        Madefire.coupon.postRedemption(INACTIVE_CAMPAIGN, data)
           .then(function() { done(unrejectedPromise); })
           .catch(function(error) {
             expect(error).to.be.instanceOf(Error);
@@ -379,11 +362,10 @@ describe('Madefire', function() {
             done();
           });
       });
-    
+
       it('should return a 410 error for an expired campaign', function(done) {
         const data = Object.assign({}, validRedemptionData);
-        const options = { data };
-        Madefire.coupon.postRedemption(EXPIRED_CAMPAIGN, options)
+        Madefire.coupon.postRedemption(EXPIRED_CAMPAIGN, data)
           .then(function() { done(unrejectedPromise); })
           .catch(function(error) {
             expect(error).to.be.instanceOf(Error);
@@ -391,7 +373,7 @@ describe('Madefire', function() {
             done();
           });
       });
-      
+
     });
   });
 });
