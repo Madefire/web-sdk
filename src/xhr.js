@@ -3,7 +3,7 @@ export default function xhr(method, url, options = {}) {
     const req = new global.XMLHttpRequest();
     req.open(method, url);
 
-    req.onload = function onLoad() {
+    req.onload = function onXhrLoad() {
       // Attempt to parse JSON and return data.
       if (req.status >= 200 && req.status < 300) {
         try {
@@ -19,7 +19,7 @@ export default function xhr(method, url, options = {}) {
       }
     };
 
-    req.onerror = function onError() {
+    req.onerror = function onXhrError() {
       reject(new Error(0));
     };
 
