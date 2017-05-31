@@ -7,12 +7,14 @@ _This SDK is in the early stages of development. Documentation is still in progr
 Using a package manager:
 
 ```bash
-yarn add git@github.com:Madefire/web-sdk.git -S
+yarn add Madefire/web-sdk -S
 ```
 
 ```bash
-npm install git@github.com:Madefire/web-sdk.git -S
+npm install Madefire/web-sdk.git -S
 ```
+
+Using git:
 
 ```bash
 git clone git@github.com:Madefire/web-sdk.git madefire-web-sdk
@@ -25,7 +27,7 @@ git clone git@github.com:Madefire/web-sdk.git madefire-web-sdk
 ```
 
 ```js
-import Madefire from 'madefire';
+import Madefire from 'madefire-web-sdk';
 ```
 
 ## API Documentation
