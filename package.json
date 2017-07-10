@@ -6,7 +6,7 @@
     "type": "git",
     "url": "https://github.com/Madefire/web-sdk"
   },
-  "main": "src/index.js",
+  "main": "src/madefire.js",
   "author": "David Furfero <furf@madefire.com>",
   "license": "Copyright © Madefire 2017",
   "scripts": {
