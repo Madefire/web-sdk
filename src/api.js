@@ -1,11 +1,10 @@
+import Madefire from './madefire';
 import xhr from './xhr';
 import { md5 } from './crypto';
 
-const API_HOST = 'https://api.madefire.com';
-// const API_HOST = 'http://localhost:3000';
-
 export function api(method, path, options) {
-  const url = `${API_HOST}/api/${path}`;
+  const { apiHost } = Madefire.getInstance().config;
+  const url = `${apiHost}/api/${path}`;
   return xhr(method, url, options);
 }
 

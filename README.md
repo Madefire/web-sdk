@@ -1,3 +1,5 @@
+
+
 # Madefire Web SDK
 
 _This SDK is in the early stages of development. Documentation is still in progress. If you have any questions, email David Furfero (furf@madefire.com) or Max Mautner (max@madefire.com)._
@@ -22,13 +24,35 @@ git clone git@github.com:Madefire/web-sdk.git madefire-web-sdk
 
 ## Usage
 
-```html
-<script src="madefire.js"></script>
-```
+1. Include Madefire SDK.
 
-```js
-import Madefire from 'madefire-web-sdk';
-```
+  ```html
+  <script src="madefire.js"></script>
+  ```
+
+  ```js
+  import Madefire from 'madefire-web-sdk';
+  ```
+
+2. Instantiate the API.
+
+  ```js
+  // For production, use the default configuration.
+  const mf = new Madefire();
+
+  // For development, you may use an alternative API host.
+  const mf = new Madefire({
+    apiHost: 'http://localhost:3000',
+  });
+  ```
+
+3. Make API requests.
+
+  ```js
+  mf.coupon.getCampaign(campaignID)
+    .then(campaign => renderCampaign(campaign))
+    .catch(error => renderError(error));
+  ```
 
 ## API Documentation
 

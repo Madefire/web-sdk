@@ -1,6 +1,3 @@
-import coupon from './coupon';
+import Madefire from './madefire';
 
-// Assemble Madefire public API.
-export default {
-  coupon,
-};
+module.exports = Madefire;
