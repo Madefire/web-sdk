@@ -1,6 +1,6 @@
 {
   "name": "madefire-web-sdk",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "An SDK for interacting with Madefire's web APIs",
   "repository": {
     "type": "git",
