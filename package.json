@@ -1,10 +1,10 @@
 {
   "name": "madefire-web-sdk",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "An SDK for interacting with Madefire's web APIs",
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/Madefire/web-sdk"
+    "type": "git",
+    "url": "https://github.com/Madefire/web-sdk"
   },
   "main": "src/index.js",
   "author": "David Furfero <furf@madefire.com>",
